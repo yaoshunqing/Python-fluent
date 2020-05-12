@@ -26,7 +26,7 @@ metro_areas = [
 ('Sao Paulo', 'BR', 19.649, (-23.547778, -46.635833)),
 ]
 
-#:实现空格，让表格工整
+#:实现空格，让表格工整 ^实现居中
 print('{:15} | {:^9} | {:^9}'.format('', 'lat.', 'long.'))
 fmt = '{:15} | {:9.4f} | {:9.4f}'
 for name, cc, pop, (latitude, longtitude) in metro_areas:
