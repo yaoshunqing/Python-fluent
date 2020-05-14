@@ -32,3 +32,16 @@ fmt = '{:15} | {:9.4f} | {:9.4f}'
 for name, cc, pop, (latitude, longtitude) in metro_areas:
     if longtitude <= 0:
         print(fmt.format(name, latitude, longtitude))
+
+
+#局部变量，全局变量测试
+a = 0
+b = 1
+def change(a, b):
+    c = a
+    a = b
+    b = c
+    return (a, b)
+
+print(change(a, b))
+print(a, b)
