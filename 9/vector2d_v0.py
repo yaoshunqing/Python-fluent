@@ -8,23 +8,26 @@ from array import array
 import math
 
 class Vector2d:
+    #__slot__替换使用__dict__，可以节省内存
+    #__slots__ = ('__x', '__y')
+
     typecode = 'd'
 
     def __init__(self, x, y):
         self.__x = float(x)
         self.__y = float(y)
 
-    @property
-    def x(self):
-        return self.__x
-    @property
-    def y(self):
-        return self.__y
+    # @property
+    # def x(self):
+    #     return self.__x
+    # @property
+    # def y(self):
+    #     return self.__y
 
     def __iter__(self):
         #return (i for i in (self.x, self.y))
-        yield self.x
-        yield self.y
+        yield self.__x
+        yield self.__y
 
     def __repr__(self):
         class_name = type(self).__name__
@@ -63,7 +66,12 @@ class Vector2d:
 
 v1 = Vector2d(3, 4)
 v2 = Vector2d(3.1, 4.2)
-print(v1.x, v1.y)
+#单个下划线不会收到python解释器的特殊处理，但很多程序员都严格遵守规定，不会在类外部访问这种属性（protected）
+#注意加上__会进行名称改写，以此来实现私有，即private
+print(v1.__dict__)
+#注意我们仍可以修改私有属性的值，只要使用别名
+v1._Vector2d__x = 5
+print(v1._Vector2d__x, v1._Vector2d__y)
 x, y = v1
 print(x, y)
 print(v1)
@@ -84,4 +92,4 @@ print(bytes(v2))
 v2_clone = Vector2d.frombytes(bytes(v2))
 print(v2_clone)
 
-
+print(v1.x)
